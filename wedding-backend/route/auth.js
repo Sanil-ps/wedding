@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 const { JWT_SCECRET } = require('../route/key')
 const authguard = require('../middleware/authguard')
 const dotenv = require('dotenv')
+
 router.get('/protect', authguard, (req, res) => {
   res.send('hlooo')
 })
