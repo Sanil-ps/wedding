@@ -18,7 +18,9 @@ router.get('/service', authguard, async (req, res) => {
   }
 })
 
-
+router.get('/allpost',async (req, res) => { 
+  res.status(500).json({ message: "something went wrong.." })
+})
 
 router.post("/create", authguard, async (req, res, next) => {
   // const { error } = await productValidation(req.body)

@@ -38,7 +38,7 @@ function Navbar(){
       >
       <Link to="/" 
       className="brand-logo left">
-        Instagram
+         Wedding Planner
       </Link>
       <ul id="nav-mobile" className="right hide-on-med-and-down">       
 

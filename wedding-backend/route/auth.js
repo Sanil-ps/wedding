@@ -13,6 +13,7 @@ router.get('/protect', authguard, (req, res) => {
 })
 
 router.post("/signup", async (req, res) => {
+  console.log(req.body);
   const userexist = await User.findOne({email:req.body.email})  //await checkEmail(req.body.email);
   if (userexist) return res.status(400).send(" email already exist");
   const user = new User();
@@ -39,7 +40,7 @@ router.post("/login", async (req, res) => {
   try {
     const token = jwt.sign({ _id: user._id }, JWT_SCECRET);
     console.log(token);
-    return res.header("auth-token", token).json({ token: token })
+    return res.header("auth-token", token).json({ token: token ,user : user})
   } catch (err) {
     console.log(err)
     return res.status(502).json({ message: 'invalid email or password' });

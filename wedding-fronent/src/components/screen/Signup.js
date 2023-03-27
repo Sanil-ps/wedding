@@ -23,10 +23,10 @@ const Signup = () => {
             })
         }).then(ress=>  ress.json())
         .then(data=>{          
-            if(data.err){  
-                    M.toast({html: data.err,classes:"#e53935 red darken-1"})
+            if(data.message){  
+                    M.toast({html: data.message,classes:"#e53935 red darken-1"})
             }else{
-                M.toast({html:data.message,classes:"#43a047 green darken-1"})
+                M.toast({html:'Sighnup Successful',classes:"#43a047 green darken-1"})
                 navigate('/signin')
             }
         })
