@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import M from 'materialize-css'
+import Select from 'react-select';
+import { UserContext } from '../../App';
 const navigator = useNavigate;
 
 const CreatePost = () => {
@@ -8,6 +10,9 @@ const CreatePost = () => {
     const [body, setBody] = useState("")
     const [image, setImage] = useState("")
     const [url, setUrl] = useState("")
+    const [service, setService]=useState('')
+    const [price, setPrice]=useState('')
+    const {state , dispatch } = useContext(UserContext)
 
     useEffect(() => {
         if (url) {
@@ -18,9 +23,12 @@ const CreatePost = () => {
                     "Authorization": "Bearer " + localStorage.getItem("jwt")
                 },
                 body: JSON.stringify({
-                    title,
+                    id:state.user._id,
+                    name:title,
+                    service,
                     body,
-                    pic: url
+                    pic: url,
+                    price
                 })
             })
                 .then(res => res.json())
@@ -59,6 +67,14 @@ const CreatePost = () => {
             .catch(err => console.log(err))
     }
 
+    const options = [
+        {value : 'wedding decor', label:'wedding decor'},
+        {value: 'wedding planning', label:'wedding planning'},
+        {value: 'catering', label:'catering'},
+        {value: 'photography', label:'photography'},
+        {value: 'Hospitality and guest management', label:'Hospitality and guest management'},
+    ]
+
     return (
         <div className='card input-filed'
             style={{
@@ -76,6 +92,24 @@ const CreatePost = () => {
                 type="text"
                 placeholder='body'
             />
+             <label>Select role : </label>
+                <div style={{padding:'10px'}}>
+                       
+                        <Select
+                         menuPortalTarget={document.body} 
+                        options={options}
+                        onChange={(e) => {console.log(e.value);
+                            setService(e.value)}} 
+                        value={options.find(el=> el.role ===service)}    
+                        placeholder="Select Role"/>
+                          
+                </div>
+            <input
+                onChange={(e) => setPrice(e.target.value)}
+                value={price}
+                type="text"
+                placeholder='Price'
+            />
             <div className="file-field input-field">
                 <div className="btn">
                     <span>Choose picture</span>
@@ -84,8 +118,8 @@ const CreatePost = () => {
                         onChange={(e) => {
                             console.log(e.target.files)
                             setImage(e.target.files[0])
-                        }} /
-                    >
+                        }} 
+                    />
                 </div>
                 <div className="file-path-wrapper">
                     <input className="file-path validate" type="text" />

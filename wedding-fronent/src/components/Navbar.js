@@ -1,14 +1,16 @@
 import React, { useContext } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {UserContext} from '../App'
+import logo from './logo.png';
 
 function Navbar(){
   const {state, dispatch} = useContext(UserContext);
-  
+  console.log('ee',logo);
   const history = useNavigate() 
   const renderList = () =>{
     if(state){
       return [
+        <li><Link to="/about">About</Link></li>,
         <li><Link to="/profile">Profile</Link></li>,
         <li><Link to="/create">Create Post</Link></li>,
         <li>
@@ -36,9 +38,10 @@ function Navbar(){
     <div className="nav-wrapper  a" 
       style={{color:'black'}}
       >
+
       <Link to="/" 
       className="brand-logo left">
-         Wedding Planner
+             <img alt='logo'  src={logo}/>
       </Link>
       <ul id="nav-mobile" className="right hide-on-med-and-down">       
 
