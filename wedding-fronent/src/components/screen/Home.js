@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from 'react'
 //import { put } from '../../../../Server/routes/post'
 
 import { UserContext } from '../../App'
+import Service from './Service/Service'
+import CompletedEvents from './Service/CompletedEvents'
 
 const Home = ({role}) => {
   const [data, setData] = useState([])
@@ -235,8 +237,10 @@ const Home = ({role}) => {
     </div>
   </div>
 
-
-
+    <h3>Browse by Differnd services</h3>
+    <Service/>
+    <h3>Happy customers</h3>
+    <CompletedEvents/>
   
 
     </div>

@@ -53,3 +53,7 @@
 .like{
   cursor:pointer
 }
+
+.checked {
+  color: orange;
+}
